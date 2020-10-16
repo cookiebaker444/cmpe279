@@ -71,14 +71,15 @@ int main(int argc, char const *argv[])
             perror("Privilege dropping failed");
             exit(EXIT_FAILURE);
         }
-	    setuid(65534);
-	    printf("privilege dropped\n");
+	//setuid(65534);
+        printf("User ID after privilege drop %d\n",getuid());
+	printf("privilege dropped\n");
 
-	    //child process processing the data
-	    valread = read( new_socket , buffer, 1024); 
-	    printf("%s\n",buffer ); 
-	    send(new_socket , hello , strlen(hello) , 0 ); 
-	    printf("Hello message sent from child\n"); 
+	//child process processing the data
+	valread = read( new_socket , buffer, 1024); 
+	printf("%s\n",buffer ); 
+	send(new_socket , hello , strlen(hello) , 0 ); 
+	printf("Hello message sent from child\n"); 
     }
    
     else {  

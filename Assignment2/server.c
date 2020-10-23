@@ -74,13 +74,14 @@ int main(int argc, char const *argv[])
 	//setuid(65534);
         printf("User ID after privilege drop %d\n",getuid());
 	printf("privilege dropped\n");
-	char* execbuff[2];
-        char fdbuff[30];
+	
+        char fdbuff[15];
         sprintf(fdbuff, "%d", new_socket);
-        execbuff[0] = "./child";
-        execbuff[1] = fdbuff;
-        execbuff[2] = NULL;
-        execvp(execbuff[0], execbuff);
+        char* execbuff[] = {"./child", fdbuff, NULL};
+        if (execvp(execbuff[0],execbuff) < 0){
+		perror("execvp failed");
+		exit(EXIT_FAILURE);
+	}
 
         printf("Child process is done\n");
 

@@ -8,8 +8,8 @@
 #include <sys/types.h>
 #define PORT 8080
 #define BUF_SIZE 100
-int main(int argc, char const *argv[]) {
-	int new_socket = atoi(argv[0]);
+int main(int argc, char const *argv[], char const *envp[]) {
+	int new_socket = atoi(argv[1]);
 	char buffer[1024] = {0};
 	char * hello = "Hello from second server";
 	int valread = read( new_socket , buffer, 1024); 
